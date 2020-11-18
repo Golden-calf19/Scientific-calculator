@@ -1,0 +1,734 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+//declaracion de clases
+//creacion de prototipos de funcion
+class operaciones {
+	public:
+		int suma(int tamanio);
+		int resta(int tamanio);
+		int multiplicacion(int tamanio);
+		float division(float a, float b);
+		int potencia(float a,int exp);
+};
+//clase geometria
+class geometria : public operaciones//Clase geometria hereda los prototipos de funcion en operaciones
+{
+	public:
+		int Atriangulo(float base, float altura);
+		int Arectangulo(float base, float altura);
+		float Acirculo(int radio);
+		int Ptriangulo(float ladoA, float ladoB,float ladoC);
+		int Prectangulo(float base, float altura);
+		float Pcirculo(float diametro);
+		int rectangulo_prism(int largo, int ancho, int alto);
+		int triangulo_prism(int base, int alturat, int altura);
+		float circular_prism(int radio, int altura);
+};
+//clase matrices
+class matrices : public geometria //Clase matrices hereda los prototipos de funcion en geometria al igual que operaciones
+{
+	public:
+		void rellenado_de_matriz(int tamanio, int* matriz);
+		void imprimir_matriz(int tamanio, int* matriz);
+		void suma_matriz(int tamanio, int* matriz1, int* matriz2, int* matrizR);
+		void resta_matriz(int tamanio, int* matriz1, int* matriz2, int* matrizR);
+		void pp_matriz(int tamanio, int* matriz1, int* matriz2, int* matrizR);
+		void transpuesta_matriz(int tamanio, int* matriz, int* matrizT);
+};
+//clase vectores
+class vectores : public matrices //hereda matrices, geometria y operaciones
+{
+	public:
+		float ecuacion_x(int ec1[3], int ec2[3]);//tamaÃ±o de arreglos
+		float ecuacion_y(int ec1[3], int ec2[3]);//tamaÃ±o de arreglos
+		void rellenar_vector(int* vector);
+		float distancia_puntos(int* vector1, int* vector2);
+		float magnitud_vector(int* vector);
+		void suma_vectores(int* vector1,int* vector2,int* vectorR);
+};
+//clase estadistica
+class estadistica : public vectores //hereda vectores y todas las demas
+{
+	public:
+		void rellenar_datos(int numdato, int A[50]);//declaramos un arreglo
+		float moda(int numdato, int A[50]);
+		float promedio(int numdato, int A[50]);
+		float mediana(int numdato, int A[50]);
+};
+//clase todo completo, aqui es la herencia completa de todas las anteriores
+class calc_completa : public estadistica {
+	public:
+
+		int selector;//ayudara en el switch
+
+		void aritmetica();
+		void figuras();
+		void matriz();
+		void vector();
+		void estadisticas();
+};
+//Funcion Principal, a qui van todos los menu
+int main() {
+	int menu;//variable que se utilizara para el menu
+	calc_completa ayuda;//creamos una variable que nos servira para llamar a nuestras funciones
+	cout << "Que operacion desea realizar?" << endl;
+	cout << " 1. aritmetica \n 2. geometria \n 3. matricial \n 4. vector \n 5. estadistica" << endl;
+	cin >> menu;
+	switch (menu)
+	{
+		case 1:
+			cout << "Que operacion desea realizar?" << endl;
+			cout << " 1. suma \n 2. resta \n 3. multiplicacion \n 4. division \n 5. potencia" << endl;
+			cin >> ayuda.selector;
+			ayuda.aritmetica();
+			break;
+		case 2:
+			cout << "Que operacion desea realizar?" << endl;
+			cout << " 1. Area Rectangulo \n 2. Area Triangulo \n 3. Area circulo \n 4. Perimetro Rectangulo  \n 5. perimetro triangulo \n 6. perimetro circulo \n 7. volumen Prisma rectangular \n 8. volumen Prisma triangular \n 8. cilindro" << endl;
+			cin >> ayuda.selector;
+			ayuda.figuras();
+			break;
+		case 3:
+			cout << "Que operacion desea realizar?" << endl;
+			cout << " 1. Suma de matriz \n 2. Resta de matriz \n 3. Multiplicacion de matriz \n 4.Transpuesta" << endl;
+			cin >> ayuda.selector;
+			ayuda.matriz();
+			break;
+		case 4:
+			cout << "Que operacion desea realizar?" << endl;
+			cout << " 1. solucion de ecuaciones \n 2. Distancia entre dos puntos \n 3. Magnitud de vector \n 4. Suma de vectores" << endl;
+			cin >> ayuda.selector;
+			ayuda.vector();
+			break;
+		case 5:
+			cout << "Que operacion desea realizar?" << endl;
+			cout << " 1. Promedio \n 2. mediana \n 3. moda" << endl;
+			cin >> ayuda.selector;
+			ayuda.estadisticas();
+			break;
+		default:
+			break;
+	}
+	return 0;
+}
+
+//Funciones Estructura operaciones
+int operaciones::suma(int tamanio)// llama a la funcion dentro de nuestra clase suma
+ {
+	int x;
+	int acumulado=0;
+	for (int i = 0; i < tamanio; i++) //ciclo para pedir n valores
+	{
+		cout << " Dime el " << (i + 1) << " numero: ";
+		cin >> x;
+		acumulado = acumulado + x;
+	}
+
+	return acumulado;
+}
+int operaciones::resta(int tamanio)// llama a la funcion dentro de nuestra clase resta
+{
+	int x;
+	int acumulado = 0;
+	for (int i = 0; i < tamanio; i++) //ciclo para pedir n valores
+	{
+		cout << " Dime el " << (i + 1) << " numero: ";
+		cin >> x;
+		if(i==0)//asignar el primer valor para irlo restando
+		{
+			acumulado=x;
+		}
+		else if(i>0)// resta normal
+		{
+			acumulado=acumulado-x;
+		}
+	}
+
+	return acumulado;
+}
+int operaciones::multiplicacion(int tamanio)// llama a la funcion dentro de nuestra clase multiplicacion
+ {
+	int x;
+	int acumulado = 1;
+	for (int i = 0; i < tamanio; i++)
+	 {
+		cout << " Dime el " << (i + 1) << " numero: ";
+		cin >> x;
+		acumulado = acumulado * x;
+	}
+
+	return acumulado;
+}
+float operaciones::division(float a, float b) // llama a la funcion dentro de nuestra clase division
+{
+	return (a/ b);
+}
+int operaciones::potencia(float a,int exp) //// llama a la funcion dentro de nuestra clase potencia
+{
+	int save=1;
+	for (int i = 0; i < exp; i++)//ciclo
+	{
+		save = save * a;
+	}
+	return save;
+}
+
+////funciones geometricas
+int geometria::Atriangulo(float base, float altura) // llama a la funcion dentro de nuestra clase triangulo
+{
+	return(base*altura)/2;//realiza operacion con formula
+}
+int geometria::Arectangulo(float base, float altura)// llama a la funcion dentro de nuestra clase
+{
+	return(base*altura);//realiza operacion con formula
+}
+float geometria::Acirculo(int radio) // llama a la funcion dentro de nuestra clase
+{
+	return(3.1416*(radio^2));//realiza operacion con formula
+}
+int geometria::Ptriangulo(float ladoA, float ladoB, float ladoC) // llama a la funcion dentro de nuestra clase
+{
+	return(ladoA+ladoB+ladoC);//realiza operacion con formula
+}
+int geometria::Prectangulo(float base, float altura) // llama a la funcion dentro de nuestra clase
+{
+	return((2*base)+(2*altura));//realiza operacion con formula
+}
+float geometria::Pcirculo(float diametro) // llama a la funcion dentro de nuestra clase
+{
+	return (3.1416*diametro);//realiza operacion con formula
+}
+int geometria::rectangulo_prism(int largo, int ancho, int alto) // llama a la funcion dentro de nuestra clase
+{
+	return (Arectangulo(largo, ancho)*alto);//realiza operacion con formula
+}
+int geometria::triangulo_prism(int base, int alturat, int altura)// llama a la funcion dentro de nuestra clase
+ {
+	return (Atriangulo(base, alturat)*altura);//realiza operacion con formula
+}
+float geometria::circular_prism(int radio, int altura)// llama a la funcion dentro de nuestra clase
+{
+	return (Acirculo(radio) * altura);//realiza operacion con formula
+}
+
+//funciones matriciales
+void matrices::rellenado_de_matriz(int tamanio, int* matriz)// llama a la funcion dentro de nuestra clase,
+{//rellenamos matrices
+	for (int i = 0; i < tamanio; i++) //se mueve en columnas
+	{
+		for (int j = 0; j < tamanio; j++) //filas
+		{
+			cout << "Elemento [" << j + 1 << "][" << i + 1 << "]: ";//indicarÃ¡ en coordenadas
+			cin >> *(matriz + j + (i * tamanio));//apuntadores para rellenar
+		}
+	}
+}
+void matrices::imprimir_matriz(int tamanio, int* matriz) // llama a la funcion dentro de nuestra clase imprimir_matriz
+{
+	//un for anidado para rellenar
+	for (int i = 0; i < tamanio; i++) {
+		for (int j = 0; j < tamanio; j++) {
+			cout << *(matriz + j + (i * tamanio)) << " ";//imorimimos la matriz guardada
+		}
+		cout << endl;//espacio
+	}
+}
+void matrices::suma_matriz(int tamanio, int* matriz1, int* matriz2, int* matrizR) // llama a la funcion dentro de nuestra clase suma_matriz
+{
+	//for anidado para operacion
+	for (int i = 0; i < tamanio; i++)
+	{
+		for (int j = 0; j < tamanio; j++)
+		{
+			(*(matrizR + j + (i * tamanio))) = (*(matriz1 + j + (i * tamanio))) + (*(matriz2 + j + (i * tamanio)));//operaciÃ³n para suma de matrices con punteros
+
+		}
+	}
+}
+void matrices::resta_matriz(int tamanio, int* matriz1, int* matriz2, int* matrizR)// llama a la funcion dentro de nuestra clase suma_matriz
+ {//for anidado para realizar operaciÃ³n
+	for (int i = 0; i < tamanio; i++)
+	{
+		for (int j = 0; j < tamanio; j++)
+		{
+
+			(*(matrizR + j + (i * tamanio))) = (*(matriz1 + j + (i * tamanio))) - (*(matriz2 + j + (i * tamanio)));// operacion de resta de matrices
+
+		}
+
+	}
+}
+void matrices::pp_matriz(int tamanio, int* matriz1, int* matriz2, int* matrizR) // llama a la funcion dentro de nuestra clase suma_matriz
+{
+	int res = 0;//ayuda para la multiplicaciÃ³n de la matriz
+	//for anidado para la operaciÃ³n
+	for (int i = 0; i < tamanio; i++) {
+		for (int j = 0; j < tamanio; j++) {
+			//para una nueva direcciÃ³n
+			for (int k = 0; k < tamanio; k++)
+			{
+				res = res + ((*(matriz1 + k + (i * tamanio))) * (*(matriz2 + j + (k * tamanio))));//multiplicacion con aumento de lo anterior
+			}
+			*(matrizR + j + (i * tamanio)) = res;//nuevo valor
+			res = 0;// se vuelve a cero para iniciar los ciclos
+		}
+
+	}
+}
+void matrices::transpuesta_matriz(int tamanio, int* matriz, int* matrizT)// llama a la funcion dentro de nuestra clase
+{
+	for (int i = 0; i < tamanio; i++) {
+		for (int j = 0; j < tamanio; j++) {
+
+			*(matrizT + j + (i * tamanio)) = *(matriz + i + (j * tamanio));
+		}
+	}
+}
+
+//funciones algebraicas y vectoriales
+//metodo de determinantes
+float vectores::ecuacion_x(int ec1[3], int ec2[3])// llama a la funcion dentro de nuestra clase
+{
+	int det;
+	det = (ec1[0] * ec2[1]) - (ec1[1] * ec2[0]);//sacamos la determinante
+	return ((((ec1[2])* (ec2[1]))- ((ec2[2])*(ec1[1])))/ det);//formula para x
+}
+float vectores::ecuacion_y(int ec1[3], int ec2[3])
+{
+	int det;
+	det = ((((ec1[0]) * (ec2[1]))) - (((ec1[1]) * ec2[0])));//obtenemos determinante
+	return ((((ec1[0])* (ec2[2]))-((ec1[2])*(ec2[0])))/ det);//formula para obtener y
+}
+void vectores::rellenar_vector(int* vector)
+{
+	for (int i = 0; i < 3; i++) //iniciamos un ciclo para rellenar
+	{
+		cin >> *(vector + i);//rellena el vector con apuntador
+	}
+}
+
+float vectores::distancia_puntos(int* vector1, int* vector2)//apuntadores, // llama a la funcion dentro de nuestra clase
+{	//variebles enteros y arreglos
+	int save[3];
+	int suma_cuadrados;
+	for (int i = 0; i < 3; i++)
+	 {
+		save[i] = ((*(vector1 + i))- (*(vector2 + i)));//combinaciÃ³n de apuntadores con matrices y arreglos
+	}
+	suma_cuadrados = (save[0] * save[0]) + (save[1] * save[1]) + (save[2] * save[2]);//formulazo
+	return (sqrt(suma_cuadrados));//obtenemos el valor con formulazo
+}
+float vectores::magnitud_vector(int* vector)//apuntadores
+ {
+	int suma_cuadrados = ((*(vector)) * (*(vector))) + ((*(vector + 1)) * (*(vector + 1))) + ((*(vector + 2)) * (*(vector + 2)));//formulazo
+	return (sqrt(suma_cuadrados));//obtenemos el valor con formulazo
+}
+//formulazo y apuntadores
+void vectores::suma_vectores(int* vector1, int* vector2, int* vectorR)
+{
+	for (int i = 0; i < 3; i++)
+	 {
+		*(vectorR + i) = ((*(vector1 + i)) + (*(vector2 + i)));//formulazo
+	}
+}
+
+//Funciones estadisticas
+void estadistica::rellenar_datos(int numdato, int A[50])// llama a la funcion dentro de nuestra clase
+ {//rellena los datso con el que se trabajara
+	cout << "Ingrese los datos : "<<endl;
+	for (int i = 0; i < numdato; i++)//ciclo para ingresar valores
+	 {
+		cout << "ingrese: ";
+		cin >> A[i];
+	}
+}
+//formula copiada de internet :) ;)
+float estadistica::moda(int numdato, int A[50])
+ {//la moda valor que se repite de un conjunto de datos
+	 //variables que cuentan, ordenan, ciclando
+	int s=0, m=s, a=1;
+//contar
+	for (int i = 0; i < numdato; i++)
+	{
+		s = 0;
+		//se utiliza para reordenar
+		for (int j = 0; j < numdato; j++)
+		{
+			//comparaciÃ³n de valores repetidos
+			if (A[i] == A[j] && i != j)
+			 {
+				s = (s + 1);
+			}
+		}
+		//imprime datos
+		if (s >= m)
+		{
+			m = s;
+			a = i;
+		}
+	}
+	return A[a];
+}
+float estadistica::promedio(int numdato, int A[50]) //suma y divididos entre n de numeros
+{
+	int save = 0;
+	for (int i = 0; i < numdato; i++)
+	{
+		save = (save + A[i]);//hace la sumatoria de valores
+	}
+	return division(save, numdato);//sacamos el promedio por formulazo
+}
+float estadistica::mediana(int numdato, int A[50])
+{//se encuentra en medio de la agrupaciÃ³n
+	int aux;
+	//contar
+	for (int i = 0; i < numdato; i++)
+	{//reordena los valores
+		for (int j = 0; j < numdato; j++)
+		{
+			if (A[j] > A[j + 1])//compara el valor actual con el futuro
+			 {
+				aux = A[j];
+				A[j] = A[j + 1];
+				A[j + 1] = aux;
+			}
+		}
+	}
+	return A[(numdato/2)+1]; //regresa el valor de la mitad
+}
+
+//Funciones calculadora completa
+//submenus de cada operaciÃ³n
+void calc_completa::aritmetica()
+{
+	int a, b;
+	switch (selector){
+		case 1://suma
+			cout << "Cuantos datos quieres sumar?: " << endl;
+			cin >> a;
+			cout << "La suma total es: " << suma(a)<<endl;
+			break;
+		case 2://resta
+			cout << "Cuantos datos quieres restar?: " << endl;
+			cin >> a;
+			cout << "La resta total es: " << resta(a) << endl;
+			break;
+		case 3://multiplicacion
+			cout << "Cuantos datos quieres multiplicar?: " << endl;
+			cin >> a;
+			cout << "= " << multiplicacion(a) << endl;
+			break;
+		case 4:// division
+			cout << "division: " << endl;
+			cin >> a;
+			cout << "/" << endl;
+			cin >> b;
+			cout << "= " << division(a, b) << endl;
+			break;
+		case 5://potencia
+			cout << "potencia: " << endl;
+			cin >> a;
+			cout << "elevado a la: ";
+			cin >> b;
+			cout << "= " << potencia(a, b) << endl;
+			break;
+		default://salida
+			break;
+	}
+}
+void calc_completa::figuras()
+ {
+	int a, b, c;
+		switch (selector)
+		{
+			case 1:
+					cout << "largo: ";
+					cin >> a;
+					cout << "ancho: ";
+					cin >> b;
+					//los metemos en if si nuestro valor es menor a 0, y los multiplicamos por -1 para que nos regrese un valor positivo
+					if (a < 0)
+					{
+						a = a * (-1);
+					}
+					if (b < 0)
+					{
+						b = b * (-1);
+					}
+						cout << "el area del rectangulo es: " << Arectangulo(a, b) << endl;
+			break;
+		 case 2:
+					cout << "base: ";
+					cin >> a;
+					cout << "altura: ";
+					cin >> b;
+					//los metemos en if si nuestro valor es menor a 0, y los multiplicamos por -1 para que nos regrese un valor positivo
+					if (a < 0)
+			 		{
+						a = a * (-1);
+					}
+					if (b < 0)
+					{
+						b = b * (-1);
+					}
+				cout << "el area del triangulo es: " << Atriangulo(a, b) << endl;
+			break;
+		case 3:
+			cout << "base: ";
+			cin >> a;
+			//los metemos en if si nuestro valor es menor a 0, y los multiplicamos por -1 para que nos regrese un valor positivo
+			if (a < 0)
+			{
+				a = a * (-1);
+			}
+			cout << "el area del circulo es: " << Acirculo(a) << endl;
+			break;
+		case 4:
+			cout << "largo: ";
+			cin >> a;
+			cout << "ancho: ";
+			cin >> b;
+			//los metemos en if si nuestro valor es menor a 0, y los multiplicamos por -1 para que nos regrese un valor positivo
+			if (a < 0)
+			{
+				a = a * (-1);
+			}
+			if (b < 0)
+			{
+				b = b * (-1);
+			}
+			cout << "el perimetro del rectangulo es: " << Prectangulo(a, b) << endl;
+			break;
+		case 5:
+			cout << "Lado A: ";
+			cin >> a;
+			cout << "Lado B: ";
+			cin >> b;
+			cout << "Lado C: ";
+			cin >> c;
+			//los metemos en if si nuestro valor es menor a 0, y los multiplicamos por -1 para que nos regrese un valor positivo
+			if (a < 0)
+			{
+				a = a * (-1);
+			}
+			if (b < 0) {
+				b = b * (-1);
+			}
+			if (c < 0) {
+				c = c * (-1);
+			}
+			cout << "el perimetro del triangulo es: " << Ptriangulo(a, b, c) << endl;
+			break;
+		case 6:
+			cout << "base: ";
+			cin >> a;
+			//los metemos en if si nuestro valor es menor a 0, y los multiplicamos por -1 para que nos regrese un valor positivo
+			if (a < 0)
+			{
+				a = a * (-1);
+			}
+			cout << "el perimetro del circulo es: " << Pcirculo(a) << endl;
+			break;
+		case 7:
+			cout << "Largo: ";
+			cin >> a;
+			cout << "Ancho: ";
+			cin >> b;
+			cout << "altura: ";
+			cin >> c;
+			//los metemos en if si nuestro valor es menor a 0, y los multiplicamos por -1 para que nos regrese un valor positivo
+			if (a < 0)
+			{
+				a = a * (-1);
+			}
+			if (b < 0) {
+				b = b * (-1);
+			}
+			if (c < 0) {
+				c = c * (-1);
+			}
+			cout << "el volumen del prisma rectangular es: " << rectangulo_prism(a, b, c) << endl;
+			break;
+		case 8:
+			cout << "largo: ";
+			cin >> a;
+			cout << "altura del triangulo: ";
+			cin >> b;
+			cout << "altura del prisma: ";
+			cin >> c;
+			//los metemos en if si nuestro valor es menor a 0, y los multiplicamos por -1 para que nos regrese un valor positivo
+			if (a < 0) {
+				a = a * (-1);
+			}
+			if (b < 0) {
+				b = b * (-1);
+			}
+			if (c < 0) {
+				c = c * (-1);
+			}
+			cout << "el volumen del prisma triangular es: " << triangulo_prism(a, b, c) << endl;
+			break;
+		case 9:
+			cout << "Radio del circulo: ";
+			cin >> a;
+			cout << "Altura del cilindro: ";
+			cin >> b;
+			//los metemos en if si nuestro valor es menor a 0, y los multiplicamos por -1 para que nos regrese un valor positivo
+			if (a < 0)
+			{
+				a = a * (-1);
+			}
+			if (b < 0) {
+				b = b * (-1);
+			}
+			cout << "el volumen del cilindro es: " << circular_prism(a, b) << endl;
+			break;
+		default:
+			break;
+	}
+}
+void calc_completa::matriz() {
+	int tamanio;
+	int M1[10], M2[10], MR[10];
+	switch (selector){
+		case 1:
+			cout << "Dime el tamanio de las matrices " << endl;
+			cin >> tamanio;
+			cout << "DIme la matriz 1" << endl;
+			rellenado_de_matriz(tamanio, (int*)M1);
+			imprimir_matriz(tamanio, (int*)M1);
+			cout << endl;
+			cout << "DIme la matriz 2" << endl;
+			rellenado_de_matriz(tamanio, (int*)M2);
+			imprimir_matriz(tamanio, (int*)M2);
+			cout << endl;
+			cout << "La suma de la matriz es: " << endl;
+			suma_matriz(tamanio, (int*)M1, (int*)M2, (int*)MR);
+			imprimir_matriz(tamanio, (int*)MR);
+			cout << endl;
+			break;
+		case 2:
+			cout << "Dime el tamanio de las matrices " << endl;
+			cin >> tamanio;
+			cout << "DIme la matriz 1" << endl;
+			rellenado_de_matriz(tamanio, (int*)M1);
+			imprimir_matriz(tamanio, (int*)M1);
+			cout << endl;
+			cout << "DIme la matriz 2" << endl;
+			rellenado_de_matriz(tamanio, (int*)M2);
+			imprimir_matriz(tamanio, (int*)M2);
+			cout << endl;
+			cout << "La resta de la matriz es: " << endl;
+			resta_matriz(tamanio, (int*)M1, (int*)M2, (int*)MR);
+			imprimir_matriz(tamanio, (int*)MR);
+			cout << endl;
+			break;
+		case 3:
+			cout << "Dime el tamanio de las matrices " << endl;
+			cin >> tamanio;
+			cout << "DIme la matriz 1" << endl;
+			rellenado_de_matriz(tamanio, (int*)M1);
+			imprimir_matriz(tamanio, (int*)M1);
+			cout << endl;
+			cout << "DIme la matriz 2" << endl;
+			rellenado_de_matriz(tamanio, (int*)M2);
+			imprimir_matriz(tamanio, (int*)M2);
+			cout << endl;
+			cout << "La multiplicacion de la matriz es: " << endl;
+			pp_matriz(tamanio, (int*)M1, (int*)M2, (int*)MR);
+			imprimir_matriz(tamanio, (int*)MR);
+			cout << endl;
+			break;
+		case 4:
+			cout << "Dime el tamanio de las matrices " << endl;
+			cin >> tamanio;
+			cout << "DIme la matriz 1" << endl;
+			rellenado_de_matriz(tamanio, (int*)M1);
+			imprimir_matriz(tamanio, (int*)M1);
+			cout << endl;
+			cout << "La Transpuesta de la matriz es: " << endl;
+			transpuesta_matriz(tamanio, (int*)M1, (int*)MR);
+			imprimir_matriz(tamanio, (int*)MR);
+			cout << endl;
+			break;
+		default:
+			break;
+	}
+}
+void calc_completa::vector() {
+	int eq1[3], eq2[3];
+	int vec1[3], vec2[3],vecR[3];
+	switch (selector){
+		case 1://vamos guardando los datos en areglos de eqc 1
+			cout << "Dime los valores de la ecuacion 1" << endl;
+			cout << "x = ";
+			cin >> eq1[0];
+			cout << "y = ";
+			cin >> eq1[1];
+			cout << "r = ";
+			cin >> eq1[2];
+			cout << "Dime los valores de la ecuacion 2" << endl;
+			//vamos guardando los datos en areglos de eqc 2
+			cout << "x = ";
+			cin >> eq2[0];
+			cout << "y = ";
+			cin >> eq2[1];
+			cout << "r = ";
+			cin >> eq2[2];
+			cout << "x=" << ecuacion_x(eq1, eq2);
+			cout << "y=" << ecuacion_y(eq1, eq2);
+			break;
+		case 2:
+
+			cout << "ingresa el vector 1" << endl;
+			rellenar_vector((int*)vec1);
+			cout << "ingresa el vector 2" << endl;
+			rellenar_vector((int*)vec2);
+			cout << endl;
+			cout << "la distancia entre los puntos es: " << distancia_puntos((int*)vec1, (int*)vec2) << endl;
+			break;
+		case 3:
+			cout << "ingresa el vector" << endl;
+			rellenar_vector((int*)vec1);
+			cout << endl;
+			cout << "la magnitud del vector es: " << magnitud_vector((int*)vec1);
+			break;
+		case 4:
+			cout << "ingresa el vector 1" << endl;
+			rellenar_vector((int*)vec1);
+			cout << "ingresa el vector 2" << endl;
+			rellenar_vector((int*)vec2);
+			cout << endl;
+			cout << "la suma de vectores es: " << endl;
+			suma_vectores((int*)vec1, (int*)vec2, (int*)vecR);
+			cout << "(" << vecR[0] << ", " << vecR[1] << ", " << vecR[2] << ")" << endl;
+			break;
+		default:
+			break;
+	}
+}
+void calc_completa::estadisticas() {
+	int A[50];
+	int numero;
+	cout << "cuantos datos deseas ingresar?" << endl;
+	cin >> numero;
+	cout << " Rellenar datos" << endl;
+	rellenar_datos(numero, A);
+	switch (selector)
+	{
+
+		case 1:
+			cout << "promedio: " << promedio(numero, A) << endl;
+			break;
+		case 2:
+			cout << "mediana: " << mediana(numero, A) << endl;
+			break;
+		case 3:
+			cout << "moda: " << moda(numero, A) << endl;
+			break;
+		default:
+
+			break;
+	}
+}
