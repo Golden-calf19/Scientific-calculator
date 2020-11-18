@@ -9,10 +9,11 @@ Las operaciones que la calculadora puede realizar son:
 Operaciones aritméticas básicas: a. Suma
 
 b. Resta
-c. Multiplicación d. División
+c. Multiplicación 
+d. División
 e. Potencia.
 
-Operaciones geométricas: (Triángulos, rectángulos y círculos) 
+Operaciones geométricas: 
 a. Área
 b. Perímetro
 c. Volumen
@@ -21,10 +22,11 @@ Operaciones matriciales:
 
 a. Suma
 b. Resta
-c. Multiplicación d. Transposición
+c. Multiplicación 
+d. Transposición
 
 Operaciones algebraicas y vectores:
-a. Resolución de sistemas de ecuaciones simples, 2 incógnitas.
+a. Resolución de sistemas de ecuaciones
 b. Distancia entre dos puntos.
 c. Magnitud de un vector.
 d. Suma de dos vectores.
