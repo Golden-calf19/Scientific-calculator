@@ -12,10 +12,9 @@ b. Resta
 c. Multiplicación d. División
 e. Potencia.
 
-Operaciones geométricas: (Triángulos, rectángulos y círculos) a. Área
-
+Operaciones geométricas: (Triángulos, rectángulos y círculos) 
+a. Área
 b. Perímetro
-
 c. Volumen
 
 Operaciones matriciales:
@@ -25,20 +24,16 @@ b. Resta
 c. Multiplicación d. Transposición
 
 Operaciones algebraicas y vectores:
-a. Resolución de sistemas de ecuaciones simples, 2 incógnitas. b. Distancia entre dos puntos.
+a. Resolución de sistemas de ecuaciones simples, 2 incógnitas.
+b. Distancia entre dos puntos.
 c. Magnitud de un vector.
 d. Suma de dos vectores.
 
-Operaciones estadísticas: a. Media
-
+Operaciones estadísticas: 
+a. Media
 b. Moda
-c. Promedio d. Mediana.
-
-Calculadora completa.
-a. Operaciones Aritméticas básicas.
-b. Operaciones geométricas.
-c. Operaciones matriciales.
-d. Operaciones algebraicas y vectores.
+c. Promedio
+d. Mediana.
 
 Hecho por:
 Enrique Cruz López
